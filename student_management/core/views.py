@@ -9,6 +9,24 @@ def index(request):
 
 def student_list(request):
     students = Student.objects.all()
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'add':
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            student_id = request.POST.get('student_id')
+            email = request.POST.get('email')
+            try:
+                Student.objects.create(
+                    first_name=first_name,
+                    last_name=last_name,
+                    student_id=student_id,
+                    email=email
+                )
+                messages.success(request, 'Student added successfully.')
+            except:
+                messages.error(request, 'Error adding student.')
+            return redirect('student_list')
     return render(request, 'student_list.html', {'students': students})
 
 def subject_list(request):

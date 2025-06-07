@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management System</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="navbar">
@@ -13,34 +14,15 @@
         <a href="/subjects/">Subjects</a>
     </div>
     <div class="container">
-        <h1>Student Management System</h1>
-        
-        <!-- Student Management -->
-        <h2>Add Student</h2>
-        <div>
-            <input type="text" id="firstName" placeholder="First Name">
-            <input type="text" id="lastName" placeholder="Last Name">
-            <input type="text" id="studentId" placeholder="Student ID">
-            <input type="email" id="email" placeholder="Email">
-            <button onclick="addStudent()">Add Student</button>
+        <h1>Welcome User!</h1>
+        <div class="welcome-buttons">
+            <a href="/students/" class="welcome-button">
+                <i class="fas fa-users"></i> Manage Students
+            </a>
+            <a href="/subjects/" class="welcome-button">
+                <i class="fas fa-book"></i> Manage Subjects
+            </a>
         </div>
-
-        <!-- Grade Management -->
-        <h2>Manage Grades</h2>
-        <div>
-            <select id="gradeStudent"></select>
-            <select id="gradeSubject"></select>
-            <input type="number" id="activityScore" placeholder="Activity Score" min="0" max="100">
-            <input type="number" id="quizScore" placeholder="Quiz Score" min="0" max="100">
-            <input type="number" id="examScore" placeholder="Exam Score" min="0" max="100">
-            <button onclick="addGrade()">Add Grade</button>
-        </div>
-        <ul id="gradeList"></ul>
     </div>
-    <script src="/static/js/app.js"></script>
-    <script>
-        // Ensure CSRF token is included in POST requests
-        const csrftoken = document.cookie.match(/csrftoken=([^;]+)/)?.[1];
-    </script>
 </body>
 </html>
