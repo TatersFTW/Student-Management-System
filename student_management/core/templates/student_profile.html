@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/admin/">Admin Panel</a>
+    </div>
+    <div class="container">
+        <h1>Student Profile</h1>
+        <div class="profile-details">
+            <h2>{{ student.first_name }} {{ student.last_name }}</h2>
+            <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+            <p><strong>Email:</strong> {{ student.email }}</p>
+        </div>
+        
+        <h2>Enrolled Subjects and Grades</h2>
+        <ul>
+            {% for grade in grades %}
+                <li>
+                    {{ grade.subject.name }} ({{ grade.subject.code }}):
+                    Activity({{ grade.activity_score }}),
+                    Quiz({{ grade.quiz_score }}),
+                    Exam({{ grade.exam_score }})
+                </li>
+            {% empty %}
+                <li>No grades available.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

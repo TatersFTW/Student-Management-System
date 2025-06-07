@@ -7,16 +7,20 @@
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/admin/">Admin Panel</a>
+    </div>
     <div class="container">
         <h1>Student Management System</h1>
         
         <!-- Student Management -->
         <h2>Manage Students</h2>
         <div>
-            <input type="text" id="firstName" placeholder="First Name">
-            <input type="text" id="lastName" placeholder="Last Name">
-            <input type="text" id="studentId" placeholder="Student ID">
-            <input type="email" id="email" placeholder="Email">
+            <input type="text" id="firstName" placeholder="First Name"><br>
+            <input type="text" id="lastName" placeholder="Last Name"><br>
+            <input type="text" id="studentId" placeholder="Student ID"><br>
+            <input type="email" id="email" placeholder="Email"><br>
             <button onclick="addStudent()">Add Student</button>
         </div>
         <ul id="studentList"></ul>
@@ -24,8 +28,8 @@
         <!-- Subject Management -->
         <h2>Manage Subjects</h2>
         <div>
-            <input type="text" id="subjectName" placeholder="Subject Name">
-            <input type="text" id="subjectCode" placeholder="Subject Code">
+            <input type="text" id="subjectName" placeholder="Subject Name"><br>
+            <input type="text" id="subjectCode" placeholder="Subject Code"><br>
             <button onclick="addSubject()">Add Subject</button>
         </div>
         <ul id="subjectList"></ul>
@@ -34,14 +38,18 @@
         <h2>Manage Grades</h2>
         <div>
             <select id="gradeStudent"></select>
-            <select id="gradeSubject"></select>
-            <input type="number" id="activityScore" placeholder="Activity Score">
-            <input type="number" id="quizScore" placeholder="Quiz Score">
-            <input type="number" id="examScore" placeholder="Exam Score">
+            <select id="gradeSubject"></select><br>
+            <input type="number" id="activityScore" placeholder="Activity Score" min="0" max="100"><br>
+            <input type="number" id="quizScore" placeholder="Quiz Score" min="0" max="100"><br>
+            <input type="number" id="examScore" placeholder="Exam Score" min="0" max="100"><br>
             <button onclick="addGrade()">Add Grade</button>
         </div>
         <ul id="gradeList"></ul>
     </div>
     <script src="/static/js/app.js"></script>
+    <script>
+        // Ensure CSRF token is included in POST requests
+        const csrftoken = document.cookie.match(/csrftoken=([^;]+)/)?.[1];
+    </script>
 </body>
 </html>
