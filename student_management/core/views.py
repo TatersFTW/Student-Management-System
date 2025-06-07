@@ -11,6 +11,38 @@ def student_list(request):
     students = Student.objects.all()
     return render(request, 'student_list.html', {'students': students})
 
+def subject_list(request):
+    subjects = Subject.objects.all()
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        if action == 'add':
+            name = request.POST.get('name')
+            code = request.POST.get('code')
+            try:
+                Subject.objects.create(name=name, code=code)
+                messages.success(request, 'Subject added successfully.')
+            except:
+                messages.error(request, 'Error adding subject.')
+            return redirect('subject_list')
+        elif action == 'update':
+            subject_id = request.POST.get('subject_id')
+            subject = get_object_or_404(Subject, id=subject_id)
+            subject.name = request.POST.get('name')
+            subject.code = request.POST.get('code')
+            try:
+                subject.save()
+                messages.success(request, 'Subject updated successfully.')
+            except:
+                messages.error(request, 'Error updating subject.')
+            return redirect('subject_list')
+        elif action == 'delete':
+            subject_id = request.POST.get('subject_id')
+            subject = get_object_or_404(Subject, id=subject_id)
+            subject.delete()
+            messages.success(request, 'Subject deleted successfully.')
+            return redirect('subject_list')
+    return render(request, 'subject_list.html', {'subjects': subjects})
+
 def student_profile(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     grades = Grade.objects.filter(student=student)
