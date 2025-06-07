@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student Management System</h1>
+        
+        <!-- Student Management -->
+        <h2>Manage Students</h2>
+        <div>
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="text" id="studentId" placeholder="Student ID">
+            <input type="email" id="email" placeholder="Email">
+            <button onclick="addStudent()">Add Student</button>
+        </div>
+        <ul id="studentList"></ul>
+
+        <!-- Subject Management -->
+        <h2>Manage Subjects</h2>
+        <div>
+            <input type="text" id="subjectName" placeholder="Subject Name">
+            <input type="text" id="subjectCode" placeholder="Subject Code">
+            <button onclick="addSubject()">Add Subject</button>
+        </div>
+        <ul id="subjectList"></ul>
+
+        <!-- Grade Management -->
+        <h2>Manage Grades</h2>
+        <div>
+            <select id="gradeStudent"></select>
+            <select id="gradeSubject"></select>
+            <input type="number" id="activityScore" placeholder="Activity Score">
+            <input type="number" id="quizScore" placeholder="Quiz Score">
+            <input type="number" id="examScore" placeholder="Exam Score">
+            <button onclick="addGrade()">Add Grade</button>
+        </div>
+        <ul id="gradeList"></ul>
+    </div>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
