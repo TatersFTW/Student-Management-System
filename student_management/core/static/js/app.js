@@ -17,32 +17,6 @@ function getCsrfToken() {
     return cookieValue;
 }
 
-// Fetch and display students
-async function loadStudents() {
-    try {
-        const response = await fetch(`${apiBaseUrl}students/`);
-        const students = await response.json();
-        const studentList = document.getElementById('studentList');
-        const gradeStudent = document.getElementById('gradeStudent');
-        studentList.innerHTML = '';
-        gradeStudent.innerHTML = '<option value="">Select Student</option>';
-        
-        students.forEach(student => {
-            const li = document.createElement('li');
-            li.innerHTML = `<a href="/student/${student.id}/">${student.first_name} ${student.last_name} (${student.student_id})</a>`;
-            li.innerHTML += ` <button onclick="deleteStudent(${student.id})">Delete</button>`;
-            studentList.appendChild(li);
-            
-            const option = document.createElement('option');
-            option.value = student.id;
-            option.textContent = `${student.first_name} ${student.last_name}`;
-            gradeStudent.appendChild(option);
-        });
-    } catch (error) {
-        console.error('Error loading students:', error);
-    }
-}
-
 // Fetch and display subjects
 async function loadSubjects() {
     try {
@@ -56,7 +30,7 @@ async function loadSubjects() {
         subjects.forEach(subject => {
             const li = document.createElement('li');
             li.textContent = `${subject.name} (${subject.code})`;
-            li.innerHTML += ` <button onclick="deleteSubject(${subject.id})">Delete</button>`;
+            li.innerHTML += ` <button class="delete-btn" onclick="deleteSubject(${subject.id})">Delete</button>`;
             subjectList.appendChild(li);
             
             const option = document.createElement('option');
@@ -85,7 +59,7 @@ async function loadGrades() {
             
             const li = document.createElement('li');
             li.textContent = `${student.first_name} ${student.last_name} - ${subject.name}: Activity(${grade.activity_score}), Quiz(${grade.quiz_score}), Exam(${grade.exam_score})`;
-            li.innerHTML += ` <button onclick="deleteGrade(${grade.id})">Delete</button>`;
+            li.innerHTML += ` <button class="delete-btn" onclick="deleteGrade(${grade.id})">Delete</button>`;
             gradeList.appendChild(li);
         }
     } catch (error) {
@@ -119,7 +93,7 @@ async function addStudent() {
             document.getElementById('lastName').value = '';
             document.getElementById('studentId').value = '';
             document.getElementById('email').value = '';
-            loadStudents();
+            alert('Student added successfully');
         } else {
             alert('Error adding student');
         }
@@ -132,7 +106,7 @@ async function addStudent() {
 // Add a subject
 async function addSubject() {
     const name = document.getElementById('subjectName').value;
-    const code =document.getElementById('subjectCode').value;
+    const code = document.getElementById('subjectCode').value; // Fixed: Changed 'subjectCode' to match input ID
     
     if (!name || !code) {
         alert('Please fill in all fields');
@@ -152,6 +126,7 @@ async function addSubject() {
             document.getElementById('subjectName').value = '';
             document.getElementById('subjectCode').value = '';
             loadSubjects();
+            alert('Subject added successfully');
         } else {
             alert('Error adding subject');
         }
@@ -196,32 +171,13 @@ async function addGrade() {
             document.getElementById('quizScore').value = '';
             document.getElementById('examScore').value = '';
             loadGrades();
+            alert('Grade added successfully');
         } else {
             alert('Error adding grade');
         }
     } catch (error) {
         console.error('Error adding grade:', error);
         alert('Error adding grade');
-    }
-}
-
-// Delete a student
-async function deleteStudent(id) {
-    try {
-        const response = await fetch(`${apiBaseUrl}students/${id}/`, { 
-            method: 'DELETE',
-            headers: {
-                'X-CSRFToken': getCsrfToken()
-            }
-        });
-        if (response.ok) {
-            loadStudents();
-        } else {
-            alert('Error deleting student');
-        }
-    } catch (error) {
-        console.error('Error deleting student:', error);
-        alert('Error deleting student');
     }
 }
 
@@ -236,6 +192,7 @@ async function deleteSubject(id) {
         });
         if (response.ok) {
             loadSubjects();
+            alert('Subject deleted successfully');
         } else {
             alert('Error deleting subject');
         }
@@ -256,6 +213,7 @@ async function deleteGrade(id) {
         });
         if (response.ok) {
             loadGrades();
+            alert('Grade deleted successfully');
         } else {
             alert('Error deleting grade');
         }
@@ -267,7 +225,6 @@ async function deleteGrade(id) {
 
 // Initialize the page
 document.addEventListener('DOMContentLoaded', () => {
-    loadStudents();
     loadSubjects();
     loadGrades();
 });

@@ -53,6 +53,14 @@ button:hover {
     background-color: #218838;
 }
 
+.delete-btn {
+    background-color: #dc3545;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
 ul {
     list-style: none;
     padding: 0;
@@ -69,4 +77,16 @@ li {
 
 .profile-details p {
     margin: 5px 0;
+}
+
+.message-success {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.message-error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
 }
