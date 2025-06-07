@@ -3,12 +3,22 @@ from rest_framework import viewsets
 from .models import Student, Subject, Grade
 from .serializers import StudentSerializer, SubjectSerializer, GradeSerializer
 from django.contrib import messages
+from django.db.models import Q
 
 def index(request):
     return render(request, 'index.html')
 
 def student_list(request):
-    students = Student.objects.all()
+    query = request.GET.get('q', '')
+    if query:
+        students = Student.objects.filter(
+            Q(first_name__icontains=query) |
+            Q(last_name__icontains=query) |
+            Q(student_id__icontains=query)
+        )
+    else:
+        students = Student.objects.all()
+    
     if request.method == 'POST':
         action = request.POST.get('action')
         if action == 'add':
@@ -27,7 +37,7 @@ def student_list(request):
             except:
                 messages.error(request, 'Error adding student.')
             return redirect('student_list')
-    return render(request, 'student_list.html', {'students': students})
+    return render(request, 'student_list.html', {'students': students, 'query': query})
 
 def subject_list(request):
     subjects = Subject.objects.all()

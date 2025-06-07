@@ -30,6 +30,7 @@ body {
     background: white;
     padding: 20px;
     border-radius: 5px;
+    text-align: center; /* Center content */
 }
 
 h1, h2 {
@@ -117,4 +118,26 @@ li {
 .welcome-button i {
     margin-right: 10px;
     font-size: 24px;
+}
+
+.search-container {
+    margin-top: 20px;
+}
+
+.search-container input {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.search-results {
+    margin-top: 10px;
+}
+
+.search-results li {
+    cursor: pointer;
+}
+
+.search-results li:hover {
+    background-color: #f0f0f0;
 }
