@@ -3,31 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Management System</title>
+    <title>Student Management</title>
     <link rel="stylesheet" href="/static/css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-    <div class="navbar">
+    <nav class="navbar">
         <a href="/">Home</a>
         <a href="/students/">Students</a>
         <a href="/subjects/">Subjects</a>
-    </div>
+    </nav>
+
     <div class="container">
-        <h1>Welcome User!</h1>
+        <h1 class="text-center">Student Management</h1>
+        
         <div class="welcome-buttons">
             <a href="/students/" class="welcome-button">
-                <i class="fas fa-users"></i> Manage Students
+                <i class="fas fa-users"></i> Students
             </a>
             <a href="/subjects/" class="welcome-button">
-                <i class="fas fa-book"></i> Manage Subjects
+                <i class="fas fa-book"></i> Subjects
             </a>
         </div>
+
         <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search students by name or ID...">
+            <input type="text" id="searchInput" placeholder="Search students...">
             <ul id="searchResults" class="search-results"></ul>
         </div>
     </div>
+
     <script src="/static/js/app.js"></script>
 </body>
 </html>
